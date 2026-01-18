@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto | Arpam Solar</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+    }
+
+    /* NAV */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(6px);
+    }
+
+    header h1 {
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 25px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* HERO */
+    .hero {
+      height: 70vh;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), url('img-contacto-hero.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .hero h2 {
+      font-size: 52px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #ccc;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* CONTACT */
+    .contact {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 120px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+
+    .contact-info h3 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .contact-info p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+
+    .contact-info span {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+
+    /* FORM */
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    form input,
+    form textarea {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #444;
+      padding: 15px 10px;
+      margin-bottom: 30px;
+      color: #fff;
+      font-size: 15px;
+    }
+
+    form input::placeholder,
+    form textarea::placeholder {
+      color: #777;
+    }
+
+    form textarea {
+      resize: none;
+      height: 120px;
+    }
+
+    form button {
+      align-self: flex-start;
+      padding: 14px 40px;
+      background: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    form button:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    /* FOOTER VIDEO */
+    .video-footer {
+      position: relative;
+      height: 60vh;
+      overflow: hidden;
+    }
+
+    .video-footer video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .footer-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .footer-overlay h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .footer-overlay p {
+      font-size: 17px;
+      color: #ccc;
+      margin-bottom: 30px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .footer-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .copy {
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    @media (max-width: 900px) {
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h2 {
+        font-size: 36px;
+      }
+    }
+    .icon-link {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle; /* o baseline, o bottom */
+  gap: 8px; /* espacio entre icono y texto */
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+.icon-link svg {
+  margin-top: -8px; /* ajusta el valor para que quede alineado */
+}
+
+.icon-link .instagram-text { /* puja o baixa tot el text */
+  line-height: 2;
+}
+
+.icon-link:hover {
+  opacity: 0.7;
+}
+
+.instagram-text {
+  white-space: nowrap; /* que el texto no se rompa en varias líneas */
+}
+.footer-overlay {
+  position: absolute;
+  inset: 0;
+  background: #222; /* gris oscuro sólido */
+  
+}
+
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Arpam Solar</h1>
+  <nav>
+    <a href="index2.html">Inicio</a>
+    <a href="servicios.html">Servicios</a>
+    <a href="proyectos.html">Proyectos</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h2>Contacto</h2>
+    <p>Cuéntanos tu proyecto y te ayudamos a pasarte a la energía solar</p>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="contact-info">
+    <h3>Hablemos</h3>
+    <p>Estamos listos para estudiar tu instalación fotovoltaica y ofrecerte la mejor solución energética.</p>
+    <span>📍 España</span>
+    <span>📞 +34 616 631 624</span>
+    <span>📞 +34 638 231 268</span>
+    <span>✉️ arpam2025@gmail.com</span>
+    <a href="https://www.instagram.com/arpamsolar" target="_blank" aria-label="Instagram" class="icon-link"> 
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24" > 
+          <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zm8.38 3.25a.88.88 0 110 1.75.88.88 0 010-1.75zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/>
+        </svg> 
+        <span class="instagram-text">Instagram</span>
+      </a>
+      
+  </div>
+
+  <form action="https://formspree.io/f/xojjjake" method="POST">
+    <input type="text" name="name" placeholder="Nombre" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="tel" name="phone" placeholder="Teléfono">
+    <textarea name="message" placeholder="Cuéntanos tu proyecto"></textarea>
+    <button type="submit">Enviar mensaje</button>
+  </form>
+  
+</section>
+
+<footer class="video-footer">
+  <video autoplay muted loop playsinline>
+    <source src="footer-video.mp4" type="video/mp4">
+  </video>
+
+  <div class="footer-overlay">
+    <h2>Conecta con el sol</h2>
+    <p>Empieza hoy tu transición hacia la energía renovable</p>
+
+
+    <span class="copy">© 2026 Arpam Solar· Energía solar</span>
+  </div>
+</footer>
+
+</body>
+</html>

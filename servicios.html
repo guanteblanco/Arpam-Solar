@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicios | Arpam Solar</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+    }
+
+    /* NAV */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      z-index: 1000;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(6px);
+    }
+
+
+
+    header h1 {
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 25px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* HERO */
+    .hero {
+      height: 80vh;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('img-servicios-hero.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .hero h2 {
+      font-size: 52px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: #ccc;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* SERVICES */
+    .services {
+      padding: 120px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 60px;
+    }
+
+    .service {
+      border-top: 1px solid #333;
+      padding-top: 30px;
+    }
+
+    .service h3 {
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+
+    .service p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #ccc;
+    }
+
+    /* CTA */
+    .cta {
+      background: #111;
+      text-align: center;
+      padding: 100px 40px;
+    }
+
+    .cta h2 {
+      font-size: 42px;
+      margin-bottom: 20px;
+    }
+
+    .cta a {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 40px;
+      border: 1px solid #fff;
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .cta a:hover {
+      background: #fff;
+      color: #000;
+    }
+    /* .hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    } */
+
+    /* FOOTER */
+    footer {
+      padding: 40px;
+      text-align: center;
+      background: #000;
+      font-size: 14px;
+      color: #aaa;
+    }
+    /* VIDEO FOOTER */
+.video-footer {
+  position: relative;
+  height: 90vh;
+  overflow: hidden;
+}
+
+.video-footer video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.footer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.footer-overlay h2 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.footer-overlay p {
+  font-size: 18px;
+  color: #ccc;
+  max-width: 700px;
+  margin-bottom: 40px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.copy {
+  font-size: 13px;
+  color: #aaa;
+}
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 25px;
+  transition: opacity 0.3s ease;
+}
+
+.icon-link:hover {
+  opacity: 0.7;
+}
+
+
+
+
+/*@media (max-width: 768px) {
+  .video-footer {
+    height: 60vh;
+  }
+
+  .footer-overlay h2 {
+    font-size: 28px;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 15px;
+  }
+}*/
+
+
+    @media (max-width: 900px) {
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h2 {
+        font-size: 36px;
+      }
+    }
+    
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Arpam Solar</h1>
+  <nav>
+    <a href="index2.html">Inicio</a>
+    <a href="servicios.html">Servicios</a>
+    <a href="proyectos.html">Proyectos</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+</header>
+
+<!-- <section class="hero">
+  <div>
+    <h2>Nuestros Servicios</h2>
+    <p>Soluciones fotovoltaicas completas, diseñadas para maximizar el rendimiento y el ahorro energético.</p>
+  </div>
+</section>  -->
+
+<footer class="video-footer">
+    <video autoplay muted loop playsinline>
+      <source src="video4.mp4" type="video/quicktime">
+    </video>
+  
+    <div class="footer-overlay">
+      <h2>Impulsamos el futuro con energía solar</h2>
+      <p>Instalaciones fotovoltaicas eficientes, sostenibles y a medida</p>
+  
+      <span class="copy">© 2026 Arpam Solar · Energía limpia</span>
+    </div>
+  </footer>
+  
+
+<section class="services">
+  <div class="service">
+    <h3>Instalaciones Residenciales</h3>
+    <p>Sistemas solares para viviendas unifamiliares y comunidades. Ahorra desde el primer día con energía limpia.</p>
+  </div>
+
+  <div class="service">
+    <h3>Instalaciones Industriales</h3>
+    <p>Proyectos de gran escala para naves, fábricas y empresas con altos consumos energéticos.</p>
+  </div>
+
+  <div class="service">
+    <h3>Autoconsumo con Baterías</h3>
+    <p>Almacena la energía producida y maximiza tu independencia energética.</p>
+  </div>
+
+  <div class="service">
+    <h3>Mantenimiento</h3>
+    <p>Servicios de mantenimiento preventivo y correctivo para garantizar el máximo rendimiento.</p>
+  </div>
+
+  <div class="service">
+    <h3>Monitorización</h3>
+    <p>Controla tu producción y consumo energético en tiempo real desde cualquier dispositivo.</p>
+  </div>
+
+  <div class="service">
+    <h3>Legalización y Subvenciones</h3>
+    <p>Gestión integral de permisos, legalización y ayudas disponibles.</p>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>¿Hablamos de tu proyecto?</h2>
+  <a href="contacto.html">Solicitar estudio gratuito</a>
+</section>
+
+<a href="https://instagram.com/arpamsolar" target="_blank" aria-label="Instagram" class="icon-link" style="display: flex; justify-content: center; margin: 0 auto;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24" >
+      <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zm8.38 3.25a.88.88 0 110 1.75.88.88 0 010-1.75zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/>
+    </svg>
+  </a> 
+  
+  
+<footer>
+  © 2026 Arpam Solar · Especialistas en energía solar
+</footer>
+
+</body>
+</html>
