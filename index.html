@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arpam Solar · Energía Solar Inteligente</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --solar: #F5A623;
+      --solar-light: #FFD580;
+      --solar-glow: rgba(245,166,35,0.18);
+      --bg: #050505;
+      --surface: #0E0E0E;
+      --border: rgba(255,255,255,0.07);
+      --text: #F0EDE6;
+      --muted: #888;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* CURSOR */
+    .cursor {
+      width: 10px; height: 10px;
+      background: var(--solar);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+      transition: transform 0.1s ease;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--solar);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      transition: transform 0.18s ease, opacity 0.2s;
+      opacity: 0.6;
+    }
+
+    /* NAV */
+    header {
+      position: fixed; top: 0; width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 52px;
+      z-index: 1000;
+      transition: background 0.4s, padding 0.4s;
+    }
+    header.scrolled {
+      background: rgba(5,5,5,0.92);
+      backdrop-filter: blur(18px);
+      padding: 14px 52px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 4px;
+      color: var(--text);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .logo-dot {
+      width: 8px; height: 8px;
+      background: var(--solar);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--solar);
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.6); opacity: 0.5; }
+    }
+
+    nav { display: flex; align-items: center; gap: 36px; }
+    nav a {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--solar);
+      transition: width 0.3s;
+    }
+    nav a:hover { color: var(--solar); }
+    nav a:hover::after { width: 100%; }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+
+    /* PARTÍCULAS DE SOL */
+    .solar-particles {
+      position: absolute; inset: 0; z-index: 0;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: var(--solar);
+      border-radius: 50%;
+      animation: float-particle linear infinite;
+      opacity: 0;
+    }
+    @keyframes float-particle {
+      0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 0.6; }
+      100% { transform: translateY(-100px) translateX(var(--dx)); opacity: 0; }
+    }
+
+    /* VIDEO BACKGROUND */
+    .hero-video-bg {
+      position: absolute; inset: 0; z-index: 1;
+      background: #050505;
+    }
+    .hero-video-bg iframe {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 177.78vh; /* 16:9 */
+      height: 100vh;
+      min-width: 100%;
+      min-height: 56.25vw;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      border: none;
+      opacity: 0.35;
+    }
+    .hero-gradient {
+      position: absolute; inset: 0; z-index: 2;
+      background: 
+        radial-gradient(ellipse 60% 50% at 50% 80%, rgba(245,166,35,0.08) 0%, transparent 60%),
+        linear-gradient(to bottom, rgba(5,5,5,0.3) 0%, rgba(5,5,5,0.5) 50%, rgba(5,5,5,0.95) 100%);
+    }
+
+    .hero-content {
+      position: relative; z-index: 3;
+      text-align: center;
+      padding: 0 30px;
+      animation: hero-in 1.2s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    @keyframes hero-in {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--solar);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fade-up 0.8s 0.3s forwards;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 12vw, 160px);
+      line-height: 0.92;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fade-up 0.9s 0.5s forwards;
+    }
+    .hero-title span { color: var(--solar); }
+    .hero-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.55);
+      max-width: 520px;
+      margin: 0 auto 50px;
+      line-height: 1.6;
+      font-weight: 300;
+      opacity: 0;
+      animation: fade-up 0.9s 0.7s forwards;
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-ctas {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      opacity: 0;
+      animation: fade-up 0.9s 0.9s forwards;
+    }
+    .btn-primary {
+      padding: 15px 40px;
+      background: var(--solar);
+      color: #000;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--solar-light);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(245,166,35,0.3);
+    }
+    .btn-ghost {
+      padding: 15px 40px;
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--solar);
+      color: var(--solar);
+      transform: translateY(-2px);
+    }
+
+    /* SCROLL INDICATOR */
+    .scroll-hint {
+      position: absolute; bottom: 36px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0;
+      animation: fade-up 1s 1.4s forwards;
+    }
+    .scroll-hint span {
+      font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, var(--solar), transparent);
+      animation: scroll-drop 2s 2s infinite;
+    }
+    @keyframes scroll-drop {
+      0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 50px 60px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      text-align: center;
+    }
+    .stat-item { padding: 10px; }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 58px;
+      color: var(--solar);
+      line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* VIDEO SECTION (YouTube embed) */
+    .video-section {
+      padding: 140px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--solar);
+      margin-bottom: 20px;
+      display: block;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .section-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 500px;
+      line-height: 1.65;
+      font-weight: 300;
+      margin-bottom: 60px;
+    }
+
+    /* VIDEO SHORTS PREVIEW */
+    .video-wrapper {
+      position: relative;
+      width: 340px;
+      max-width: 100%;
+      aspect-ratio: 9/16;
+      background: #0a0a0a;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin: 0 auto;
+      box-shadow: 0 0 80px rgba(245,166,35,0.1);
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+    }
+    .video-wrapper img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), filter 0.4s;
+      filter: brightness(0.75);
+    }
+    .video-wrapper:hover img {
+      transform: scale(1.04);
+      filter: brightness(0.55);
+    }
+    .video-play-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 18px;
+    }
+    .video-play-btn {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.5);
+      border: 2px solid var(--solar);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s;
+      box-shadow: 0 0 30px rgba(245,166,35,0.25);
+    }
+    .video-wrapper:hover .video-play-btn {
+      background: var(--solar);
+      box-shadow: 0 0 60px rgba(245,166,35,0.5);
+      transform: scale(1.08);
+    }
+    .video-wrapper:hover .video-play-btn svg path { fill: #000; }
+    .video-play-label {
+      font-size: 11px; letter-spacing: 3px;
+      text-transform: uppercase; color: rgba(255,255,255,0.7);
+    }
+    .video-yt-badge {
+      position: absolute; bottom: 16px; right: 16px;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      padding: 5px 12px;
+      font-size: 11px; letter-spacing: 1px;
+      color: rgba(255,255,255,0.5);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .yt-icon { color: #FF0000; font-size: 14px; }
+
+    /* SERVICIOS */
+    .services-section {
+      padding: 140px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 60px;
+      border: 1px solid var(--border);
+    }
+    .service-card {
+      padding: 50px 40px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .service-card:hover { background: rgba(245,166,35,0.04); }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--solar);
+      transition: width 0.4s;
+    }
+    .service-card:hover::before { width: 100%; }
+    .service-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--solar);
+      margin-bottom: 24px;
+      display: block;
+    }
+    .service-icon {
+      font-size: 36px;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .service-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+    .service-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* PROCESO */
+    .process-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 140px 60px;
+    }
+    .process-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 60px;
+      margin-top: 70px;
+    }
+    .step {
+      position: relative;
+    }
+    .step::after {
+      content: '→';
+      position: absolute; top: 18px; right: -36px;
+      color: var(--solar);
+      font-size: 22px;
+      opacity: 0.4;
+    }
+    .step:last-child::after { display: none; }
+    .step-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 80px;
+      color: rgba(245,166,35,0.1);
+      line-height: 1;
+      margin-bottom: -10px;
+    }
+    .step h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .step p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      padding: 160px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(245,166,35,0.08) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 8vw, 100px);
+      line-height: 0.95;
+      margin-bottom: 30px;
+    }
+    .cta-section p {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 50px;
+      font-weight: 300;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px; letter-spacing: 4px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .footer-links-list { display: flex; gap: 30px; flex-wrap: wrap; }
+    .footer-links-list a {
+      font-size: 13px; color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links-list a:hover { color: var(--solar); }
+    .footer-copy {
+      font-size: 12px; color: rgba(255,255,255,0.25);
+      width: 100%; text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      margin-top: 10px;
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible {
+      opacity: 1; transform: none;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      header { padding: 18px 24px; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 40px 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .step::after { display: none; }
+      .video-section, .services-section, .services-section { padding: 80px 24px; }
+      footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
+      nav { gap: 20px; }
+      nav a { font-size: 12px; }
+    }
+    @media (max-width: 600px) {
+      header { padding: 16px 20px; }
+      .process-steps { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: repeat(2,1fr); }
+      .cta-section { padding: 100px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- PARTÍCULAS -->
+<div class="solar-particles" id="particles"></div>
+
+<!-- HEADER -->
+<header id="header">
+  <a href="index.html" class="logo">
+    <div class="logo-dot"></div>
+    Arpam Solar
+  </a>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="servicios.html">Servicios</a>
+    <a href="proyectos.html">Proyectos</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-video-bg" id="heroVideoBg">
+    <!-- El iframe de YouTube se inserta aquí desde JS si hay URL guardada -->
+  </div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Especialistas en energía fotovoltaica</p>
+    <h1 class="hero-title">Energía<br><span>Solar</span><br>Inteligente</h1>
+    <p class="hero-sub">Montajes fotovoltaicos para hogares, empresas e industria. Ahorra desde el primer día.</p>
+    <div class="hero-ctas">
+      <a href="contacto.html" class="btn-primary">Solicitar estudio</a>
+      <a href="proyectos.html" class="btn-ghost">Ver proyectos</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <span class="stat-num" data-target="50">0</span>
+    <span class="stat-label">Instalaciones realizadas</span>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-num" data-target="800" data-suffix="kWp">0</span>
+    <span class="stat-label">Potencia instalada</span>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-num" data-target="30" data-suffix="%">0</span>
+    <span class="stat-label">Ahorro medio anual</span>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-num" data-target="10" data-suffix=" años">0</span>
+    <span class="stat-label">De experiencia</span>
+  </div>
+</div>
+
+<!-- VIDEO SECTION -->
+<section class="video-section">
+  <span class="section-label reveal">Nuestro trabajo</span>
+  <h2 class="section-title reveal">Mira cómo<br>transformamos<br>la energía</h2>
+  <p class="section-sub reveal">Añade aquí un vídeo de YouTube para mostrar tu trabajo, instalaciones o presentación de empresa.</p>
+
+  <a href="https://youtube.com/shorts/bQORdIiocFM" target="_blank" rel="noopener" class="video-wrapper reveal">
+    <img src="https://img.youtube.com/vi/bQORdIiocFM/maxresdefault.jpg" 
+         alt="Arpam Solar - vídeo"
+         onerror="this.src='https://img.youtube.com/vi/bQORdIiocFM/hqdefault.jpg'">
+    <div class="video-play-overlay">
+      <div class="video-play-btn">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+          <path d="M8 5l11 7-11 7V5z" fill="white"/>
+        </svg>
+      </div>
+      <span class="video-play-label">Ver en YouTube</span>
+    </div>
+    <div class="video-yt-badge">
+      <span class="yt-icon">▶</span> YouTube Short
+    </div>
+  </a>
+</section>
+
+<!-- SERVICIOS -->
+<section class="services-section">
+  <span class="section-label reveal">Qué hacemos</span>
+  <h2 class="section-title reveal">Soluciones<br>a medida</h2>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-num">01</span>
+      <span class="service-icon">🏠</span>
+      <h3>Residencial</h3>
+      <p>Sistemas solares para viviendas. Ahorra en tu factura desde el primer día con energía limpia y duradera.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">02</span>
+      <span class="service-icon">🏭</span>
+      <h3>Industrial</h3>
+      <p>Grandes proyectos para naves, fábricas y empresas con altos consumos energéticos. Diseñados a medida.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">03</span>
+      <span class="service-icon">🔋</span>
+      <h3>Baterías</h3>
+      <p>Almacena la energía solar y maximiza tu independencia de la red eléctrica con sistemas de baterías.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">04</span>
+      <span class="service-icon">🔧</span>
+      <h3>Mantenimiento</h3>
+      <p>Mantenimiento preventivo y correctivo para garantizar el máximo rendimiento de tu instalación.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">05</span>
+      <span class="service-icon">📊</span>
+      <h3>Monitorización</h3>
+      <p>Control total de tu producción y consumo en tiempo real desde cualquier dispositivo.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">06</span>
+      <span class="service-icon">📋</span>
+      <h3>Legalización</h3>
+      <p>Gestión integral de permisos, legalización de instalaciones y ayudas disponibles.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="process-section">
+  <div class="process-inner">
+    <span class="section-label reveal">Cómo trabajamos</span>
+    <h2 class="section-title reveal">Un proceso<br>claro y eficiente</h2>
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h4>Estudio gratuito</h4>
+        <p>Analizamos tu consumo y situación para diseñar la instalación ideal.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <h4>Propuesta</h4>
+        <p>Te presentamos el proyecto completo con retorno de inversión estimado.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <h4>Instalación</h4>
+        <p>Nuestro equipo instala con rapidez y sin interferir en tu actividad.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <h4>Seguimiento</h4>
+        <p>Monitorizamos el sistema y te acompañamos durante toda su vida útil.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 class="reveal">¿Listo para<br>el <span style="color:var(--solar)">sol?</span></h2>
+  <p class="reveal">Cuéntanos tu proyecto y te hacemos un estudio gratuito sin compromiso.</p>
+  <div class="reveal">
+    <a href="contacto.html" class="btn-primary">Contactar ahora</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="logo-dot"></div>
+    Arpam Solar
+  </div>
+  <div class="footer-links-list">
+    <a href="index.html">Inicio</a>
+    <a href="servicios.html">Servicios</a>
+    <a href="proyectos.html">Proyectos</a>
+    <a href="contacto.html">Contacto</a>
+    <a href="https://www.instagram.com/arpamsolar" target="_blank">Instagram</a>
+  </div>
+  <div class="footer-copy">© 2026 Arpam Solar · Energía limpia para el futuro</div>
+</footer>
+
+<script>
+  /* CURSOR */
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
+  });
+  function animateRing() {
+    rx += (mx - rx) * 0.14;
+    ry += (my - ry) * 0.14;
+    ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  /* HEADER SCROLL */
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  /* PARTÍCULAS */
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 3 + 1;
+    p.style.cssText = `
+      left: ${Math.random()*100}%;
+      width: ${size}px; height: ${size}px;
+      --dx: ${(Math.random()-0.5)*200}px;
+      animation-duration: ${6 + Math.random()*12}s;
+      animation-delay: ${Math.random()*10}s;
+      opacity: 0;
+    `;
+    container.appendChild(p);
+  }
+
+  /* SCROLL REVEAL */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* COUNTER ANIMATION */
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    let current = 0;
+    const duration = 1800;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = Math.floor(current) + suffix;
+      if (current >= target) clearInterval(timer);
+    }, 16);
+  }
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCounter(e.target);
+        counterObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stat-num').forEach(el => counterObs.observe(el));
+
+  /* Hero bg - shorts no permiten embed, se deja el gradiente */
+</script>
+
+</body>
+</html>
