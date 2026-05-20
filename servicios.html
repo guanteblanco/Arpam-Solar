@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Instalaciones residenciales, industriales, baterías, monitorización, mantenimiento y legalización de placas solares en Cataluña. Estudio gratuito." />
+  <title>Servicios | Arpam Solar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --solar: #F5A623;
+      --solar-light: #FFD580;
+      --bg: #050505;
+      --surface: #0E0E0E;
+      --border: rgba(255,255,255,0.07);
+      --text: #F0EDE6;
+      --muted: #888;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; overflow-x: hidden; cursor: none; }
+
+    .cursor { width: 10px; height: 10px; background: var(--solar); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; }
+    .cursor-ring { width: 36px; height: 36px; border: 1.5px solid var(--solar); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; opacity: 0.5; }
+
+    header { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 22px 52px; z-index: 1000; transition: background 0.4s, padding 0.4s; }
+    header.scrolled { background: rgba(5,5,5,0.92); backdrop-filter: blur(18px); padding: 14px 52px; border-bottom: 1px solid var(--border); }
+    .logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 4px; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .logo-dot { width: 8px; height: 8px; background: var(--solar); border-radius: 50%; box-shadow: 0 0 10px var(--solar); animation: pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%,100% { transform: scale(1); } 50% { transform: scale(1.6); opacity: 0.5; } }
+    nav { display: flex; gap: 36px; }
+    nav a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; position: relative; }
+    nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--solar); transition: width 0.3s; }
+    nav a:hover { color: var(--solar); }
+    nav a:hover::after { width: 100%; }
+
+    /* VIDEO HERO */
+    .video-hero {
+      height: 100vh; position: relative; overflow: hidden;
+    }
+    .video-hero video { width: 100%; height: 100%; object-fit: cover; }
+    .video-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(5,5,5,0.4) 0%, rgba(5,5,5,0.6) 50%, rgba(5,5,5,1) 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .video-hero-content { text-align: center; padding: 0 30px; }
+    .video-hero-content .eyebrow { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--solar); margin-bottom: 24px; display: block; animation: fade-up 0.8s 0.3s both; }
+    .video-hero-content h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(72px, 12vw, 150px); line-height: 0.9; animation: fade-up 0.9s 0.5s both; }
+    .video-hero-content p { font-size: 17px; color: rgba(255,255,255,0.55); margin-top: 24px; max-width: 500px; font-weight: 300; line-height: 1.6; animation: fade-up 0.9s 0.7s both; }
+    @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+    /* SERVICES LIST */
+    .services-section { max-width: 1200px; margin: 0 auto; padding: 120px 60px; }
+    .section-label { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--solar); margin-bottom: 20px; display: block; }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 80px); line-height: 0.95; margin-bottom: 80px; }
+
+    .service-row {
+      display: grid; grid-template-columns: 80px 1fr 1fr;
+      gap: 40px; align-items: start;
+      padding: 50px 0;
+      border-top: 1px solid var(--border);
+      transition: border-color 0.3s;
+      position: relative;
+    }
+    .service-row::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 0; height: 1px; background: var(--solar);
+      transition: width 0.5s;
+    }
+    .service-row:hover::after { width: 100%; }
+    .service-row:last-child { border-bottom: 1px solid var(--border); }
+
+    .service-num-big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px; letter-spacing: 3px;
+      color: var(--solar); padding-top: 8px;
+    }
+    .service-row h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px; letter-spacing: 1px;
+      line-height: 1; transition: color 0.3s;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .service-row:hover h3 { color: var(--solar); }
+    .service-row .icon { font-size: 28px; }
+    .service-row p { font-size: 15px; color: var(--muted); line-height: 1.7; font-weight: 300; padding-top: 6px; }
+
+    /* BENEFITS */
+    .benefits-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 120px 60px;
+    }
+    .benefits-inner { max-width: 1200px; margin: 0 auto; }
+    .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; margin-top: 70px; }
+    .benefit {
+      padding: 40px;
+      border: 1px solid var(--border);
+      transition: border-color 0.3s, background 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .benefit::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 0% 0%, rgba(245,166,35,0.06) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .benefit:hover { border-color: rgba(245,166,35,0.3); }
+    .benefit:hover::before { opacity: 1; }
+    .benefit-num { font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: rgba(245,166,35,0.12); line-height: 1; margin-bottom: -8px; }
+    .benefit h4 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; margin-bottom: 12px; }
+    .benefit p { font-size: 14px; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+    /* CTA */
+    .cta-section { padding: 140px 60px; text-align: center; position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(245,166,35,0.07) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .cta-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 8vw, 100px); line-height: 0.95; margin-bottom: 24px; position: relative; }
+    .cta-section p { font-size: 17px; color: var(--muted); margin-bottom: 50px; font-weight: 300; }
+    .btn-primary { padding: 15px 40px; background: var(--solar); color: #000; text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.3s; display: inline-block; }
+    .btn-primary:hover { background: var(--solar-light); transform: translateY(-2px); box-shadow: 0 16px 40px rgba(245,166,35,0.3); }
+
+    /* FOOTER */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 4px; display: flex; align-items: center; gap: 10px; }
+    .footer-links-list { display: flex; gap: 30px; flex-wrap: wrap; }
+    .footer-links-list a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+    .footer-links-list a:hover { color: var(--solar); }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); width: 100%; text-align: center; padding-top: 30px; border-top: 1px solid var(--border); margin-top: 10px; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      header { padding: 18px 24px; }
+      header.scrolled { padding: 12px 24px; }
+      .services-section { padding: 80px 24px; }
+      .service-row { grid-template-columns: 1fr; gap: 16px; padding: 36px 0; }
+      .service-num-big { display: none; }
+      .benefits-section { padding: 80px 24px; }
+      .benefits-grid { grid-template-columns: 1fr; gap: 24px; }
+      .cta-section { padding: 100px 24px; }
+      footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
+      nav { gap: 20px; }
+    }
+
+    /* HAMBURGER */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px; z-index: 1001;
+    }
+    .hamburger span { width: 24px; height: 1.5px; background: var(--text); transition: all 0.3s; display: block; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
+    .mobile-menu {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(5,5,5,0.97); z-index: 999;
+      flex-direction: column; align-items: center; justify-content: center; gap: 40px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 4px;
+      color: var(--text); text-decoration: none; transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--solar); }
+    @media (max-width: 900px) { nav { display: none; } .hamburger { display: flex; } }
+    /* WHATSAPP FLOTANTE */
+    .whatsapp-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 8888;
+      display: flex; align-items: center; gap: 12px; text-decoration: none;
+      animation: wa-in 0.8s 2s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes wa-in { from { opacity:0; transform:scale(0.5) translateY(20px); } to { opacity:1; transform:scale(1) translateY(0); } }
+    .wa-label {
+      background: rgba(5,5,5,0.9); border: 1px solid rgba(37,211,102,0.3);
+      backdrop-filter: blur(12px); color: #fff; font-size: 13px; font-weight: 500;
+      border-radius: 6px; max-width: 0; opacity: 0; overflow: hidden;
+      white-space: nowrap; height: 44px; display: flex; align-items: center;
+      transition: max-width 0.4s, opacity 0.4s, padding 0.4s; padding: 0;
+    }
+    .whatsapp-float:hover .wa-label { max-width: 280px; opacity: 1; padding: 0 14px; }
+    .wa-btn {
+      width: 58px; height: 58px; background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: wa-pulse 3s 3s ease infinite;
+    }
+    @keyframes wa-pulse {
+      0%  { box-shadow: 0 4px 20px rgba(37,211,102,0.4), 0 0 0 0 rgba(37,211,102,0.3); }
+      70% { box-shadow: 0 4px 20px rgba(37,211,102,0.4), 0 0 0 14px rgba(37,211,102,0); }
+      100%{ box-shadow: 0 4px 20px rgba(37,211,102,0.4), 0 0 0 0 rgba(37,211,102,0); }
+    }
+    .whatsapp-float:hover .wa-btn { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+    .wa-btn svg { width: 30px; height: 30px; }
+    @media (max-width: 600px) { .whatsapp-float { bottom:20px; right:20px; } .wa-btn { width:52px; height:52px; } }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<header id="header">
+  <a href="index.html" class="logo"><div class="logo-dot"></div>Arpam Solar</a>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="servicios.html">Servicios</a>
+    <a href="proyectos.html">Proyectos</a>
+    
+  </nav>
+</header>
+  <button class="hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobileMenu()">Inicio</a>
+  <a href="servicios.html" onclick="closeMobileMenu()">Servicios</a>
+  <a href="proyectos.html" onclick="closeMobileMenu()">Proyectos</a>
+  
+</div>
+
+<!-- VIDEO HERO -->
+<div class="video-hero">
+  <video autoplay muted loop playsinline>
+    <source src="video4.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay">
+    <div class="video-hero-content">
+      <span class="eyebrow">Lo que ofrecemos</span>
+      <h1>Nuestros<br>Servicios</h1>
+      <p>Soluciones fotovoltaicas completas, diseñadas para maximizar el rendimiento y el ahorro energético.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section">
+  <span class="section-label reveal">Servicios</span>
+  <h2 class="section-title reveal">Todo lo que<br>necesitas</h2>
+
+  <div class="service-row reveal">
+    <span class="service-num-big">01</span>
+    <h3><span class="icon">🏠</span> Instalaciones Residenciales</h3>
+    <p>Sistemas solares para viviendas unifamiliares y comunidades. Ahorra desde el primer día con energía limpia y soluciones adaptadas a tu consumo real.</p>
+  </div>
+
+  <div class="service-row reveal">
+    <span class="service-num-big">02</span>
+    <h3><span class="icon">🏭</span> Instalaciones Industriales</h3>
+    <p>Proyectos de gran escala para naves, fábricas y empresas con altos consumos energéticos. Ingeniería solar diseñada a medida para maximizar el retorno de inversión.</p>
+  </div>
+
+  <div class="service-row reveal">
+    <span class="service-num-big">03</span>
+    <h3><span class="icon">🔋</span> Autoconsumo con Baterías</h3>
+    <p>Almacena la energía producida y maximiza tu independencia energética. Sistemas con baterías de litio de alta capacidad para garantizar suministro incluso sin sol.</p>
+  </div>
+
+  <div class="service-row reveal">
+    <span class="service-num-big">04</span>
+    <h3><span class="icon">🔧</span> Mantenimiento</h3>
+    <p>Servicios de mantenimiento preventivo y correctivo para garantizar el máximo rendimiento de tu instalación durante toda su vida útil.</p>
+  </div>
+
+  <div class="service-row reveal">
+    <span class="service-num-big">05</span>
+    <h3><span class="icon">📊</span> Monitorización</h3>
+    <p>Controla tu producción y consumo energético en tiempo real desde cualquier dispositivo. Alertas automáticas y reportes mensuales de rendimiento.</p>
+  </div>
+
+  <div class="service-row reveal">
+    <span class="service-num-big">06</span>
+    <h3><span class="icon">📋</span> Legalización y Subvenciones</h3>
+    <p>Gestión integral de permisos, legalización de la instalación y tramitación de todas las ayudas y subvenciones disponibles a nivel autonómico y estatal.</p>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits-section">
+  <div class="benefits-inner">
+    <span class="section-label reveal">Por qué elegirnos</span>
+    <h2 class="section-title reveal">Ventajas que<br>marcan la diferencia</h2>
+    <div class="benefits-grid">
+      <div class="benefit reveal">
+        <div class="benefit-num">01</div>
+        <h4>Ahorro desde el día 1</h4>
+        <p>Nuestras instalaciones empiezan a generar ahorro desde el momento en que entran en funcionamiento.</p>
+      </div>
+      <div class="benefit reveal">
+        <div class="benefit-num">02</div>
+        <h4>Garantía total</h4>
+        <p>Paneles con 25 años de garantía de producción e inversores con garantía de 10 años. Tranquilidad asegurada.</p>
+      </div>
+      <div class="benefit reveal">
+        <div class="benefit-num">03</div>
+        <h4>Equipo local</h4>
+        <p>Somos de aquí. Conocemos el territorio, la normativa local y estamos disponibles cuando nos necesitas.</p>
+      </div>
+      <div class="benefit reveal">
+        <div class="benefit-num">04</div>
+        <h4>Proyecto a medida</h4>
+        <p>Cada instalación es única. Diseñamos en base a tu consumo real, orientación y presupuesto.</p>
+      </div>
+      <div class="benefit reveal">
+        <div class="benefit-num">05</div>
+        <h4>Financiación disponible</h4>
+        <p>Te ayudamos a acceder a financiación y subvenciones para que el coste inicial sea mínimo.</p>
+      </div>
+      <div class="benefit reveal">
+        <div class="benefit-num">06</div>
+        <h4>Instalación rápida</h4>
+        <p>Ejecutamos cada proyecto con rapidez y sin interferir en tu actividad diaria o familiar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 class="reveal">¿Hablamos de<br>tu <span style="color:var(--solar)">proyecto?</span></h2>
+  <p class="reveal">Estudio gratuito y sin compromiso. Cuéntanos tu caso.</p>
+  <a href="https://wa.me/34644789916?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20instalaciones%20solares.%20%2F%20Hola%2C%20m%27agradaria%20rebre%20m%C3%A9s%20informaci%C3%B3%20sobre%20instal%C2%B7lacions%20solars." class="btn-primary reveal" target="_blank" rel="noopener">Escriu-nos per WhatsApp</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><div class="logo-dot"></div>Arpam Solar</div>
+  <div class="footer-links-list">
+    <a href="index.html">Inicio</a>
+    <a href="servicios.html">Servicios</a>
+    <a href="proyectos.html">Proyectos</a>
+    
+    <a href="https://www.instagram.com/arpamsolar" target="_blank">Instagram</a>
+  </div>
+  <div class="footer-copy">© 2026 Arpam Solar · Especialistas en energía solar</div>
+</footer>
+
+<script>
+
+  /* HAMBURGER MÓVIL */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  function closeMobileMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
+  });
+  function animateRing() {
+    rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+    ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60);
+  });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/34644789916?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20instalaciones%20solares.%20%2F%20Hola%2C%20m%27agradaria%20rebre%20m%C3%A9s%20informaci%C3%B3%20sobre%20instal%C2%B7lacions%20solars." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+  <div class="wa-label">Hola, escríbenos 👋</div>
+  <div class="wa-btn">
+    <svg viewBox="0 0 32 32" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 2C8.268 2 2 8.268 2 16c0 2.52.658 4.883 1.81 6.93L2 30l7.278-1.787A13.94 13.94 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.45 11.45 0 01-5.824-1.587l-.418-.247-4.32 1.062 1.094-4.193-.272-.43A11.46 11.46 0 014.5 16C4.5 9.649 9.649 4.5 16 4.5S27.5 9.649 27.5 16 22.351 27.5 16 27.5zm6.29-8.617c-.344-.172-2.036-1.004-2.352-1.118-.316-.115-.547-.172-.777.172-.23.344-.892 1.118-1.093 1.348-.2.23-.402.259-.746.086-.344-.172-1.452-.535-2.766-1.707-1.022-.91-1.712-2.035-1.913-2.379-.2-.344-.021-.53.15-.701.155-.155.344-.402.516-.603.172-.2.23-.344.344-.573.115-.23.057-.43-.029-.603-.086-.172-.777-1.875-1.065-2.567-.28-.674-.565-.582-.777-.593l-.66-.011c-.23 0-.603.086-.919.43s-1.208 1.18-1.208 2.878 1.237 3.336 1.409 3.566c.172.23 2.436 3.72 5.903 5.213.825.356 1.469.569 1.972.728.829.263 1.584.226 2.18.137.665-.099 2.036-.833 2.323-1.636.287-.803.287-1.491.2-1.636-.085-.143-.316-.23-.66-.402z"/>
+    </svg>
+  </div>
+</a>
+
+</body>
+</html>
