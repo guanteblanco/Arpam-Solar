@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Términos y Condiciones · Arpam Solar</title>
+  <meta name="description" content="Términos y Condiciones de uso del sitio web de Arpam Solar y de contratación de servicios de instalación fotovoltaica." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --solar: #F5A623;
+      --solar-light: #FFD580;
+      --solar-glow: rgba(245,166,35,0.18);
+      --bg: #050505;
+      --text: #F0EDE6;
+      --border: rgba(240,237,230,0.08);
+      --muted: rgba(240,237,230,0.45);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      position: fixed; top: 0; width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 52px;
+      z-index: 1000;
+      transition: background 0.4s, padding 0.4s;
+    }
+    header.scrolled {
+      background: rgba(5,5,5,0.92);
+      backdrop-filter: blur(18px);
+      padding: 14px 52px;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 4px;
+      color: var(--text);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .logo-dot {
+      width: 8px; height: 8px;
+      background: var(--solar);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--solar);
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.6); opacity: 0.5; }
+    }
+    nav { display: flex; align-items: center; gap: 36px; }
+    nav a {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--solar);
+      transition: width 0.3s;
+    }
+    nav a:hover { color: var(--solar); }
+    nav a:hover::after { width: 100%; }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px; z-index: 1001;
+    }
+    .hamburger span { width: 24px; height: 1.5px; background: var(--text); transition: all 0.3s; display: block; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
+    .mobile-menu {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(5,5,5,0.97); z-index: 999;
+      flex-direction: column; align-items: center; justify-content: center; gap: 40px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 4px;
+      color: var(--text); text-decoration: none; transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--solar); }
+    @media (max-width: 900px) { nav { display: none; } .hamburger { display: flex; } }
+
+    .page-hero {
+      padding: 160px 52px 80px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--solar-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--solar);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .page-hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 30px; height: 1px;
+      background: var(--solar);
+    }
+    .page-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 7vw, 90px);
+      letter-spacing: 4px;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+    .page-hero p {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 560px;
+    }
+    .update-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--border);
+      padding: 8px 18px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-top: 28px;
+    }
+    .update-badge span { color: var(--solar); }
+
+    .legal-content {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 80px 52px 120px;
+    }
+    .legal-section {
+      margin-bottom: 64px;
+      padding-bottom: 64px;
+      border-bottom: 1px solid var(--border);
+    }
+    .legal-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .section-number {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--solar);
+      margin-bottom: 12px;
+    }
+    .legal-section h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 2px;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+    .legal-section p {
+      color: rgba(240,237,230,0.75);
+      font-size: 15px;
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+    .legal-section p:last-child { margin-bottom: 0; }
+    .legal-section ul {
+      list-style: none;
+      margin: 16px 0;
+    }
+    .legal-section ul li {
+      color: rgba(240,237,230,0.75);
+      font-size: 15px;
+      padding: 10px 0 10px 24px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.7;
+    }
+    .legal-section ul li:last-child { border-bottom: none; }
+    .legal-section ul li::before {
+      content: '';
+      position: absolute; left: 0; top: 18px;
+      width: 6px; height: 1px;
+      background: var(--solar);
+    }
+    .legal-section strong { color: var(--text); font-weight: 500; }
+    .highlight-box {
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--solar);
+      padding: 24px 28px;
+      margin: 24px 0;
+      background: rgba(245,166,35,0.04);
+    }
+    .highlight-box p { margin: 0; font-size: 14px; }
+    .contact-block {
+      background: rgba(240,237,230,0.03);
+      border: 1px solid var(--border);
+      padding: 32px;
+      margin-top: 24px;
+    }
+    .contact-block p { font-size: 14px; margin-bottom: 8px; }
+    .contact-block a { color: var(--solar); text-decoration: none; }
+    .contact-block a:hover { text-decoration: underline; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 52px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .footer-links-list { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links-list a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .footer-links-list a:hover { color: var(--solar); }
+    .footer-copy {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      width: 100%;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 900px) {
+      header { padding: 18px 24px; }
+      .page-hero { padding: 130px 24px 60px; }
+      .legal-content { padding: 60px 24px 80px; }
+      footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <a href="index.html" class="logo">
+    <div class="logo-dot"></div>
+    Arpam Solar
+  </a>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="servicios.html">Servicios</a>
+    <a href="proyectos.html">Proyectos</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobileMenu()">Inicio</a>
+  <a href="servicios.html" onclick="closeMobileMenu()">Servicios</a>
+  <a href="proyectos.html" onclick="closeMobileMenu()">Proyectos</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-label">Legal</div>
+  <h1>Términos y<br>Condiciones</h1>
+  <p>El acceso y uso de este sitio web, así como la contratación de nuestros servicios de instalación fotovoltaica, implican la aceptación de las presentes condiciones. Léelas con atención.</p>
+  <div class="update-badge">Última actualización: <span>Junio 2026</span></div>
+</section>
+
+<!-- LEGAL CONTENT -->
+<div class="legal-content">
+
+  <div class="legal-section">
+    <div class="section-number">01</div>
+    <h2>Datos del Titular y Ámbito de Aplicación</h2>
+    <p>Los presentes Términos y Condiciones regulan el acceso y uso del sitio web de <strong>Arpam Solar S.L.</strong> (en adelante, «Arpam Solar» o «la empresa»), así como la contratación de los servicios de diseño, suministro, instalación y mantenimiento de sistemas de energía fotovoltaica.</p>
+    <div class="contact-block">
+      <p><strong>Razón social:</strong> Arpam Solar S.L.</p>
+      <p><strong>Actividad:</strong> Instalación y comercialización de sistemas de energía fotovoltaica</p>
+      <p><strong>Domicilio social:</strong> Cataluña, España</p>
+      <p><strong>Correo electrónico:</strong> <a href="mailto:info@arpamsolar.com">info@arpamsolar.com</a></p>
+      <p><strong>Sitio web:</strong> <a href="https://www.arpamsolar.com">www.arpamsolar.com</a></p>
+    </div>
+    <p style="margin-top:20px;">El acceso al sitio web es gratuito. El uso del mismo implica la aceptación plena y sin reservas de los presentes Términos y Condiciones en la versión publicada en el momento del acceso. Arpam Solar se reserva el derecho a modificarlos en cualquier momento, siendo responsabilidad del usuario su consulta periódica.</p>
+  </div>
+
+  <div class="legal-section">
+    <div class="section-number">02</div>
+    <h2>Uso del Sitio Web</h2>
+    <p>El usuario se compromete a utilizar el sitio web de Arpam Solar de conformidad con la ley, la moral, el orden público y los presentes Términos y Condiciones. En particular, el usuario se obliga a:</p>
+    <ul>
+      <li>No utilizar el sitio web con fines ilícitos, lesivos de derechos de terceros o que puedan dañar la imagen o los sistemas de Arpam Solar.</li>
+      <li>No intentar acceder, alterar o suprimir datos de otros usuarios, servidores o redes conectadas al sitio web.</li>
+      <li>No reproducir, copiar, distribuir, transformar o comunicar públicamente los contenidos del sitio web sin autorización expresa de Arpam Solar.</li>
+      <li>No introducir virus, código malicioso u otros elementos que puedan dañar, alterar o impedir el normal funcionamiento del sitio web o de los sistemas de terceros.</li>
+      <li>Facilitar información veraz y actualizada cuando cumplimente formularios de contacto o solicitud de presupuesto.</li>
+    </ul>
+    <p>Arpam Solar se reserva el derecho a denegar, retirar o suspender el acceso al sitio web a cualquier usuario que incumpla las presentes condiciones, sin necesidad de preaviso y sin perjuicio de las acciones legales que pudieran corresponder.</p>
+  </div>
+
+  <div class="legal-section">
+    <div class="section-number">03</div>
+    <h2>Servicios Ofrecidos y Proceso de Contratación</h2>
+    <p>Arpam Solar presta servicios de estudio, diseño, suministro, instalación y mantenimiento de instalaciones fotovoltaicas para uso residencial, empresarial e industrial en el territorio español. A través del sitio web es posible:</p>
+    <ul>
+      <li>Solicitar información sobre los servicios disponibles.</li>
+      <li>Pedir un <strong>estudio gratuito y sin compromiso</strong> de viabilidad técnica y económica de una instalación solar.</li>
+      <li>Contactar con el equipo comercial para obtener un presupuesto personalizado.</li>
+    </ul>
+    <p>La cumplimentación de un formulario de contacto o la solicitud de un estudio gratuito no supone, en ningún caso, el establecimiento de una relación contractual ni el compromiso de contratación por ninguna de las partes. La relación contractual se perfecciona únicamente mediante la firma del correspondiente contrato de instalación o prestación de servicios entre el cliente y Arpam Solar.</p>
+    <div class="highlight-box">
+      <p>El estudio de viabilidad que realizamos de forma gratuita es orientativo y no vinculante. Las condiciones definitivas (precio, plazo, características técnicas) quedan fijadas exclusivamente en el contrato firmado por ambas partes.</p>
+    </div>
+  </div>
+
+  <div class="legal-section">
+    <div class="section-number">04</div>
+    <h2>Presupuestos, Precios y Forma de Pago</h2>
+    <p>Los presupuestos emitidos por Arpam Solar tienen una validez de <strong>30 días naturales</strong> desde su fecha de emisión, salvo indicación expresa en contrario. Transcurrido dicho plazo sin que el cliente haya procedido a su aceptación, Arpam Solar se reserva el derecho a modificar las condiciones económicas.</p>
+    <p>Los precios indicados en los presupuestos incluyen el IVA vigente, salvo que se indique expresamente lo contrario. Los precios no incluyen posibles tasas, licencias municipales, permisos de obras o gestiones administrativas ante distribuidoras eléctricas, que en su caso serán detallados y presupuestados por separado.</p>
+    <p>Las condiciones de pago (forma, plazos y porcentajes) quedan establecidas en cada contrato de instalación. Con carácter general, Arpam Solar aplica un esquema de pago escalonado vinculado a los hitos del proyecto (firma del contrato, inicio de la instalación y puesta en marcha). El incumplimiento de los plazos de pago acordados facultará a Arpam Solar para suspender los trabajos y aplicar los intereses de demora legalmente establecidos.</p>
+  </div>
+
+  <div class="legal-section">
+    <div class="section-number">05</div>
+    <h2>Garantías y Responsabilidades</h2>
+    <p>Arpam Solar garantiza que los equipos y materiales suministrados son nuevos, de primera calidad y cumplen con las normativas técnicas y de seguridad aplicables en España. Las garantías específicas de los equipos (paneles fotovoltaicos, inversores, estructuras, baterías, etc.) son las otorgadas por cada fabricante y se detallan en la documentación técnica entregada al cliente en el momento de la puesta en marcha.</p>
+    <p>Con carácter general, Arpam Solar ofrece:</p>
+    <ul>
+      <li><strong>Garantía de instalación:</strong> 2 años sobre mano de obra y defectos de instalación, conforme a la normativa de garantías en servicios de construcción e instalación aplicable en España.</li>
+      <li><strong>Garantía de producto:</strong> la establecida por cada fabricante para cada componente, que se indica en el presupuesto y la documentación técnica del proyecto.</li>
+      <li><strong>Garantía de rendimiento:</strong> cuando así se especifique en el contrato, se garantiza una producción energética mínima anual calculada sobre los datos de irradiación de la zona y las características del sistema instalado.</li>
+    </ul>
+    <p>Las garantías quedan excluidas en caso de mal uso, manipulación no autorizada, accidentes, fenómenos meteorológicos extraordinarios, actos de terceros o cualquier causa ajena a Arpam Solar. La responsabilidad de Arpam Solar queda en todo caso limitada al valor de la instalación contratada.</p>
+  </div>
+
+  <div class="legal-section">
+    <div class="section-number">06</div>
+    <h2>Propiedad Intelectual e Industrial</h2>
+    <p>Todos los contenidos del sitio web de Arpam Solar —incluyendo, sin carácter limitativo, textos, imágenes, fotografías, gráficos, logotipos, iconos, diseño gráfico, código fuente, estructura y presentación— son propiedad de Arpam Solar o de terceros que han autorizado su uso, y están protegidos por la legislación española e internacional en materia de propiedad intelectual e industrial.</p>
+    <p>Queda expresamente prohibida su reproducción, distribución, comunicación pública o transformación, total o parcial, sin el consentimiento previo y por escrito de Arpam Solar. El acceso al sitio web no implica la cesión de ningún derecho de propiedad intelectual o industrial sobre los contenidos.</p>
+    <p>El uso del nombre comercial «Arpam Solar» y de los signos distintivos asociados está reservado exclusivamente a la empresa. Cualquier uso no autorizado podrá ser objeto de las acciones legales pertinentes.</p>
+  </div>
+
+  <div class="legal-section">
+    <div class="section-number">07</div>
+    <h2>Exclusión de Responsabilidad del Sitio Web</h2>
+    <p>Arpam Solar no garantiza la disponibilidad continua e ininterrumpida del sitio web, pudiendo suspenderlo temporalmente por razones de mantenimiento, actualización, seguridad o fuerza mayor. Tampoco garantiza la ausencia de virus u otros elementos dañinos que puedan causar alteraciones en los sistemas informáticos del usuario.</p>
+    <p>Los contenidos del sitio web tienen carácter meramente informativo. La información sobre ahorros energéticos, periodos de retorno de la inversión y producción estimada se basa en parámetros medios y puede variar en función de las condiciones específicas de cada instalación. Estos datos no constituyen garantía de resultado ni son vinculantes salvo que se incluyan expresamente en el contrato firmado.</p>
+    <p>Arpam Solar no se hace responsable de los contenidos de sitios web de terceros a los que pueda enlazar el sitio web, ni de la información o servicios ofrecidos por dichos terceros.</p>
+  </div>
+
+  <div class="legal-section">
+    <div class="section-number">08</div>
+    <h2>Cancelaciones y Desistimiento</h2>
+    <p>El cliente podrá desistir del contrato en los términos previstos por la legislación española vigente. Para los contratos celebrados fuera del establecimiento mercantil o a distancia, el cliente consumidor dispondrá de un plazo de <strong>14 días naturales</strong> para ejercer el derecho de desistimiento sin necesidad de justificación, a contar desde la fecha de la firma del contrato.</p>
+    <p>Una vez iniciados los trabajos de instalación, el ejercicio del derecho de desistimiento implicará el abono proporcional de los trabajos ya realizados y los materiales ya suministrados y/o comprometidos, de acuerdo con lo establecido en el Real Decreto Legislativo 1/2007, de 16 de noviembre, por el que se aprueba el texto refundido de la Ley General para la Defensa de los Consumidores y Usuarios.</p>
+    <p>Para ejercer el derecho de desistimiento, el cliente deberá comunicarlo por escrito a <a href="mailto:info@arpamsolar.com" style="color:var(--solar)">info@arpamsolar.com</a> o mediante correo postal a nuestra dirección social, indicando el número de contrato y sus datos de identificación.</p>
+  </div>
+
+  <div class="legal-section">
+    <div class="section-number">09</div>
+    <h2>Protección de Datos</h2>
+    <p>El tratamiento de los datos personales facilitados a través del sitio web o en el marco de la relación contractual se rige por nuestra <a href="privacidad.html" style="color:var(--solar)">Política de Privacidad</a>, que forma parte integrante de los presentes Términos y Condiciones.</p>
+    <p>Arpam Solar trata los datos personales de sus clientes y usuarios de conformidad con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD). El cliente tiene derecho a acceder, rectificar, suprimir, limitar el tratamiento y oponerse al mismo, así como a la portabilidad de sus datos, en los términos previstos en la normativa vigente.</p>
+  </div>
+
+  <div class="legal-section">
+    <div class="section-number">10</div>
+    <h2>Legislación Aplicable y Resolución de Conflictos</h2>
+    <p>Los presentes Términos y Condiciones se rigen por la legislación española. Para cualquier controversia derivada del acceso o uso del sitio web o de la relación contractual con Arpam Solar, las partes se someten, con renuncia expresa a cualquier otro fuero que pudiera corresponderles, a la jurisdicción de los Juzgados y Tribunales competentes conforme a la normativa procesal española.</p>
+    <p>En el caso de clientes consumidores, será de aplicación preferente el fuero del domicilio del consumidor, conforme a lo establecido en la normativa de protección de consumidores y usuarios.</p>
+    <p>Con carácter previo al ejercicio de acciones judiciales, ambas partes se comprometen a intentar resolver cualquier discrepancia de forma amistosa mediante comunicación directa. Adicionalmente, los consumidores de la Unión Europea pueden acudir a la plataforma de resolución de litigios en línea de la Comisión Europea, disponible en <a href="https://ec.europa.eu/consumers/odr" target="_blank" style="color:var(--solar)">ec.europa.eu/consumers/odr</a>.</p>
+    <div class="contact-block">
+      <p><strong>¿Tienes alguna duda?</strong></p>
+      <p>Estamos a tu disposición para cualquier consulta sobre estos términos:</p>
+      <p><a href="mailto:info@arpamsolar.com">info@arpamsolar.com</a></p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="logo-dot"></div>
+    Arpam Solar
+  </div>
+  <div class="footer-links-list">
+    <a href="index.html">Inicio</a>
+    <a href="servicios.html">Servicios</a>
+    <a href="proyectos.html">Proyectos</a>
+    <a href="privacidad.html">Privacidad</a>
+    <a href="terminos.html">Términos</a>
+    <a href="https://www.instagram.com/arpamsolar" target="_blank">Instagram</a>
+  </div>
+  <div class="footer-copy">© 2026 Arpam Solar · Energía limpia para el futuro</div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  function closeMobileMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60);
+  });
+</script>
+</body>
+</html>
